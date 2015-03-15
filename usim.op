@@ -1,0 +1,96 @@
+#!/usr/bin/env op.cgi
+
+$lua{[[
+  local luasql = require "luasql.sqlite3"
+  app.conn = app.conn or recycle(function () return luasql.sqlite3():connect(web.real_path .. "/usim.db") end, 20)
+  mapper.conn = app.conn
+  usim_list = model("usim_list")
+  if web.method == "post" then
+    if web.input.id then
+      local item = usim_list:find(tonumber(web.input.id))
+      if web.input.toggle then
+        item.done = not item.done
+        item:save()
+      elseif web.input.remove then
+        item:delete()
+        forward("usims.op")
+      end
+      finish()
+    else
+      local item = usim_list:new()
+      item.msisdn = web.input.msisdn or ""
+      item.imei = web.input.imei or ""
+      item.serial = web.input.serial or ""
+      item.operator = web.input.operator or ""
+      item.user_name = web.input.name or ""
+      item.user_team = web.input.team or ""
+      item:save()
+      forward("usims.op")
+    end
+  end
+]]}
+
+<html>
+<head>
+<title>USIM List</title>
+<script type="text/javascript" src="$static_link{'/jquery-1.2.3.min.js'}"></script>
+<script>
+function set_callbacks() {
+  $$(".remove").click(function () {
+    $$("#items>[item_id=" + $$(this).attr("item_id") +"]").slideUp("slow");
+    $$("#items").load("$link{ '/' }", { id: $$(this).attr("item_id"), remove: true },
+      function () { set_callbacks(); });
+  });
+  $$(".item").click(function () {
+    $$.post("$link{ '/' }", { id: $$(this).attr("item_id"), toggle: true });
+  });
+}
+
+$$(document).ready(function () {
+  $$("#form_post").submit(function () {
+    $$("#input_submit_add").attr("disabled", true);
+    $$("#items").load("$link{ '/' }", {
+                         msisdn: $$("#input_text_msisdn").val(),
+                         imei: $$("#input_text_imei").val(),
+                         serial: $$("#input_text_serial").val(),
+                         operator: $$("#input_text_operator").val(),
+                         name: $$("#input_text_name").val(),
+                         team: $$("#input_text_team").val(),
+                       }, 
+                       function () {
+                         $$("#input_text_msisdn").val("");
+                         $$("#input_text_imei").val("");
+                         $$("#input_text_serial").val("");
+                         $$("#input_text_operator").val("");
+                         $$("#input_text_name").val("");
+                         $$("#input_text_team").val("");
+                         set_callbacks(); 
+                         $$("#input_submit_add").attr("disabled",false); }
+                       );
+    return false;
+  });
+  set_callbacks();
+});
+</script>
+<style>
+ul { padding-left: 0px; }
+li { list-style-type: none;} 
+.remove { font-size: xx-small; }
+</style>
+</head>
+<body>
+<h1>USIM List</h1>
+<ul id="items">
+$include{ "usims.op" }
+</ul>
+<form id = "form_post" method = "POST" action = "$link{'/'}">
+msisdn : <input id = "input_text_msisdn" type = "text" name = "msisdn" size = 30 /></br>
+imei : <input id = "input_text_imei" type = "text" name = "imei" size = 30 /></br>
+serial : <input id = "input_text_serial" type = "text" name = "serial" size = 30 /></br>
+operator : <input id = "input_text_operator" type = "text" name = "operator" size = 30 /></br>
+name : <input id = "input_text_name" type = "text" name = "name" size = 30 /></br>
+team : <input id = "input_text_team" type = "text" name = "team" size = 30 /></br>
+<input id = "input_submit_add" type = "submit" value = "Add" />
+</form>
+</body>
+</html>

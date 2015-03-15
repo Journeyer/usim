@@ -1,0 +1,15 @@
+$lua{[[
+  items = usim_list:find_all{ order = "created_at desc" }
+]]}
+$if{$items|1}[==[
+returned msisdn imei serial operator user_name user_team
+<hr>
+$items[[
+<li item_id="$id">
+  <input class="item" type="checkbox" $if{$done}[=[checked]=] item_id="$id"/>
+  $msisdn $imei $serial $operator $user_name $user_team
+  <a href = "#" class = "remove" item_id = "$id">Remove</a>
+</li>
+]]
+]==],[==[No USIM!]==]
+
