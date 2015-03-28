@@ -36,12 +36,12 @@ $lua{[[
 <script type="text/javascript" src="$static_link{'/jquery-1.2.3.min.js'}"></script>
 <script>
 function set_callbacks() {
-  $$(".remove").click(function () {
+  $$(".item_remove").click(function () {
     $$("#items").load("$link{ '/' }", { id: $$(this).attr("item_id"), remove: true },
                       function () { set_callbacks();
                       });
   });
-  $$(".item").click(function () {
+  $$(".item_done").click(function () {
     $$.post("$link{ '/' }", { id: $$(this).attr("item_id"), toggle: true });
   });
 }
@@ -73,40 +73,7 @@ $$(document).ready(function () {
   set_callbacks();
 });
 </script>
-<style type="text/css">
-.Table
-{   
-  display: table;
-}   
-.Title
-{   
-  display: table-caption;
-  text-align: center;
-  font-weight: bold;
-  font-size: larger;
-}   
-.Heading
-{   
-  display: table-row;
-  font-weight: bold;
-  text-align: center;
-}   
-.Row
-{   
-  display: table-row;
-}   
-.Cell
-{   
-  display: table-cell;
-  border: solid;
-  border-width: thin;
-  padding-left: 5px;
-  padding-right: 5px;
-}   
-.remove {
-  font-size: xx-small;
-}
-</style>
+$include{ "style.css" }
 </head>
 <body>
 <form id = "form_post" method = "POST" action = "$link{'/'}">
