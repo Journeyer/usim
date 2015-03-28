@@ -32,7 +32,7 @@ $lua{[[
 
 <html>
 <head>
-<title>USIM List</title>
+<title>USIMs</title>
 <script type="text/javascript" src="$static_link{'/jquery-1.2.3.min.js'}"></script>
 <script>
 function set_callbacks() {
@@ -73,16 +73,24 @@ $$(document).ready(function () {
 });
 </script>
 <style>
-ul { padding-left: 0px; }
-li { list-style-type: none;} 
-.remove { font-size: xx-small; }
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 5px;
+  text-align: left;
+}
+.remove {
+  font-size: xx-small;
+}
 </style>
 </head>
 <body>
-<h1>USIM List</h1>
-<ul id="items">
+<table id="items" style="width:100%">
+  <caption>USIM Status</caption>
 $include{ "usims.op" }
-</ul>
+</table>
 <form id = "form_post" method = "POST" action = "$link{'/'}">
 msisdn : <input id = "input_text_msisdn" type = "text" name = "msisdn" size = 30 /></br>
 imei : <input id = "input_text_imei" type = "text" name = "imei" size = 30 /></br>
