@@ -39,7 +39,8 @@ function set_callbacks() {
   $$(".remove").click(function () {
     $$("#items>[item_id=" + $$(this).attr("item_id") +"]").slideUp("slow");
     $$("#items").load("$link{ '/' }", { id: $$(this).attr("item_id"), remove: true },
-      function () { set_callbacks(); });
+                      function () { set_callbacks();
+                      });
   });
   $$(".item").click(function () {
     $$.post("$link{ '/' }", { id: $$(this).attr("item_id"), toggle: true });
@@ -65,39 +66,68 @@ $$(document).ready(function () {
                          $$("#input_text_name").val("");
                          $$("#input_text_team").val("");
                          set_callbacks(); 
-                         $$("#input_submit_add").attr("disabled",false); }
+                         $$("#input_submit_add").attr("disabled",false);
+                         }
                        );
     return false;
   });
   set_callbacks();
 });
 </script>
-<style>
-table, th, td {
-  border: 1px solid black;
-  border-collapse: collapse;
-}
-th, td {
-  padding: 5px;
-  text-align: left;
-}
+<style type="text/css">
+.Table
+{   
+  display: table;
+}   
+.Title
+{   
+  display: table-caption;
+  text-align: center;
+  font-weight: bold;
+  font-size: larger;
+}   
+.Heading
+{   
+  display: table-row;
+  font-weight: bold;
+  text-align: center;
+}   
+.Row
+{   
+  display: table-row;
+}   
+.Cell
+{   
+  display: table-cell;
+  border: solid;
+  border-width: thin;
+  padding-left: 5px;
+  padding-right: 5px;
+}   
 .remove {
   font-size: xx-small;
 }
 </style>
 </head>
 <body>
-<table id="items" style="width:100%">
-  <caption>USIM Status</caption>
+<div class="Table" id="items">
 $include{ "usims.op" }
-</table>
+</div>
 <form id = "form_post" method = "POST" action = "$link{'/'}">
-msisdn : <input id = "input_text_msisdn" type = "text" name = "msisdn" size = 30 /></br>
-imei : <input id = "input_text_imei" type = "text" name = "imei" size = 30 /></br>
-serial : <input id = "input_text_serial" type = "text" name = "serial" size = 30 /></br>
-operator : <input id = "input_text_operator" type = "text" name = "operator" size = 30 /></br>
-name : <input id = "input_text_name" type = "text" name = "name" size = 30 /></br>
-team : <input id = "input_text_team" type = "text" name = "team" size = 30 /></br>
+<table style="width:100%">
+  <caption>New USIM</caption>
+<tr>
+<th>returned</th><th>msisdn</th><th>imei</th><th>serial</th><th>operator</th><th>user_name</th><th>user_team</th>
+</tr><tr>
+<td></td>
+<td><input id = "input_text_msisdn" type = "text" name = "msisdn" size = 10 /></td>
+<td><input id = "input_text_imei" type = "text" name = "imei" size = 10 /></td>
+<td><input id = "input_text_serial" type = "text" name = "serial" size = 10 /></td>
+<td><input id = "input_text_operator" type = "text" name = "operator" size = 10 /></td>
+<td><input id = "input_text_name" type = "text" name = "name" size = 10 /></td>
+<td><input id = "input_text_team" type = "text" name = "team" size = 10 /></td>
+</tr>
+</table>
 <input id = "input_submit_add" type = "submit" value = "Add" />
 </form>
 </body>

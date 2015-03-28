@@ -1,14 +1,62 @@
+
 $lua{[[
   items = usim_list:find_all{ order = "created_at desc" }
 ]]}
+
 $if{$items|1}[==[
-<th>returned</th><th>msisdn</th><th>imei</th><th>serial</th><th>operator</th><th>user_name</th><th>user_team</th>
+  <div class="Title">
+    <p>USIM Status</p>
+  </div>
+  <div class="Heading">
+    <div class="Cell">
+      <p>returned</p>
+    </div>
+    <div class="Cell">
+      <p>msisdn</p>
+    </div>
+    <div class="Cell">
+      <p>imei</p>
+    </div>
+    <div class="Cell">
+      <p>serial</p>
+    </div>
+    <div class="Cell">
+      <p>operator</p>
+    </div>
+    <div class="Cell">
+      <p>user_name</p>
+    </div>
+    <div class="Cell">
+      <p>user_team</p>
+    </div>
+  </div>
 $items[[
-<tr item_id="$id">
-  <td><input class="item" type="checkbox" $if{$done}[=[checked]=] item_id="$id"/></td>
-  <td>$msisdn</td><td>$imei</td><td>$serial</td><td>$operator</td><td>$user_name</td><td>$user_team</td>
-  <td><a href = "#" class = "remove" item_id = "$id">Remove</a></td>
-</tr>
+  <div class="Row" item_id="$id">
+    <div class="Cell">
+      <p><input class="item" type="checkbox" $if{$done}[=[checked]=] item_id="$id"/></p>
+    </div>
+    <div class="Cell">
+      <p>$msisdn</p>
+    </div>
+    <div class="Cell">
+      <p>$imei</p>
+    </div>
+    <div class="Cell">
+      <p>$serial</p>
+    </div>
+    <div class="Cell">
+      <p>$operator</p>
+    </div>
+    <div class="Cell">
+      <p>$user_name</p>
+    </div>
+    <div class="Cell">
+      <p>$user_team</p>
+    </div>
+    <div class="Cell">
+      <p><a href = "#" class = "remove" item_id = "$id">Remove</a></p>
+    </div>
+  </div>
 ]]
 ]==],[==[No USIM!]==]
 
