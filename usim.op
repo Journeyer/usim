@@ -37,7 +37,6 @@ $lua{[[
 <script>
 function set_callbacks() {
   $$(".remove").click(function () {
-    $$("#items>[item_id=" + $$(this).attr("item_id") +"]").slideUp("slow");
     $$("#items").load("$link{ '/' }", { id: $$(this).attr("item_id"), remove: true },
                       function () { set_callbacks();
                       });
@@ -110,25 +109,10 @@ $$(document).ready(function () {
 </style>
 </head>
 <body>
+<form id = "form_post" method = "POST" action = "$link{'/'}">
 <div class="Table" id="items">
 $include{ "usims.op" }
 </div>
-<form id = "form_post" method = "POST" action = "$link{'/'}">
-<table style="width:100%">
-  <caption>New USIM</caption>
-<tr>
-<th>returned</th><th>msisdn</th><th>imei</th><th>serial</th><th>operator</th><th>user_name</th><th>user_team</th>
-</tr><tr>
-<td></td>
-<td><input id = "input_text_msisdn" type = "text" name = "msisdn" size = 10 /></td>
-<td><input id = "input_text_imei" type = "text" name = "imei" size = 10 /></td>
-<td><input id = "input_text_serial" type = "text" name = "serial" size = 10 /></td>
-<td><input id = "input_text_operator" type = "text" name = "operator" size = 10 /></td>
-<td><input id = "input_text_name" type = "text" name = "name" size = 10 /></td>
-<td><input id = "input_text_team" type = "text" name = "team" size = 10 /></td>
-</tr>
-</table>
-<input id = "input_submit_add" type = "submit" value = "Add" />
 </form>
 </body>
 </html>

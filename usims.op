@@ -60,3 +60,30 @@ $items[[
 ]]
 ]==],[==[No USIM!]==]
 
+<div class="Row">
+  <div class="Cell">
+    <p></p>
+  </div>
+  <div class="Cell">
+    <p><input id = "input_text_msisdn" type = "text" name = "msisdn" /></p>
+  </div>
+  <div class="Cell">
+    <p><input id = "input_text_imei" type = "text" name = "imei" /></p>
+  </div>
+  <div class="Cell">
+    <p><input id = "input_text_serial" type = "text" name = "serial" /></p>
+  </div>
+  <div class="Cell">
+    <p><input id = "input_text_operator" type = "text" name = "operator" /></p>
+  </div>
+  <div class="Cell">
+    <p><input id = "input_text_name" type = "text" name = "name" /></p>
+  </div>
+  <div class="Cell">
+    <p><input id = "input_text_team" type = "text" name = "team" /></p>
+  </div>
+  <div class="Cell">
+    <p><input id = "input_submit_add" type = "submit" value = "Add" /></p>
+  </div>
+</div>
+
