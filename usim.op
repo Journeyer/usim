@@ -9,14 +9,27 @@ $lua{[[
     if web.input.id then
       local item = usim_list:find(tonumber(web.input.id))
       if web.input.toggle then
+        -- toggle --
         item.done = not item.done
         item:save()
       elseif web.input.remove then
+        -- remove --
         item:delete()
+        forward("usims.op")
+      elseif web.input.update then
+        -- update --
+        item.msisdn = web.input.msisdn or ""
+        item.imei = web.input.imei or ""
+        item.serial = web.input.serial or ""
+        item.operator = web.input.operator or ""
+        item.user_name = web.input.name or ""
+        item.user_team = web.input.team or ""
+        item:save()
         forward("usims.op")
       end
       finish()
     else
+      -- add --
       local item = usim_list:new()
       item.msisdn = web.input.msisdn or ""
       item.imei = web.input.imei or ""
@@ -36,13 +49,34 @@ $lua{[[
 <script type="text/javascript" src="$static_link{'/jquery-1.2.3.min.js'}"></script>
 <script>
 function set_callbacks() {
+  $$(".item_done").click(function () {
+    $$.post("$link{ '/' }", {
+                         id: $$(this).parent().parent().attr("item_id"),
+                         toggle: true
+                      });
+  });
   $$(".item_remove").click(function () {
-    $$("#items").load("$link{ '/' }", { id: $$(this).attr("item_id"), remove: true },
+    console.log($$(this).parent().parent().attr("item_id")); 
+    $$("#items").load("$link{ '/' }", {
+                         id: $$(this).parent().parent().attr("item_id"),
+                         remove: true
+                      },
                       function () { set_callbacks();
                       });
   });
-  $$(".item_done").click(function () {
-    $$.post("$link{ '/' }", { id: $$(this).attr("item_id"), toggle: true });
+  $$(".item_update").click(function () {
+    $$("#items").load("$link{ '/' }", {
+                         id:       $$(this).parent().parent().attr("item_id"),
+                         update:   true,
+                         msisdn:   $$(this).parent().siblings().find(".input_text_msisdn").val(),
+                         imei:     $$(this).parent().siblings().find(".input_text_imei").val(),
+                         serial:   $$(this).parent().siblings().find(".input_text_serial").val(),
+                         operator: $$(this).parent().siblings().find(".input_text_operator").val(),
+                         name:     $$(this).parent().siblings().find(".input_text_name").val(),
+                         team:     $$(this).parent().siblings().find(".input_text_team").val(),
+                      },
+                      function () { set_callbacks();
+                      });
   });
 }
 

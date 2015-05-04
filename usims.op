@@ -33,7 +33,7 @@ $if{$items|1}[==[
 $items[[
   <div class="Row" item_id="$id">
     <div class="Cell">
-      <p><input class="item_done" type="checkbox" $if{$done}[=[checked]=] item_id="$id"/></p>
+      <p><input class="item_done" type="checkbox" $if{$done}[=[checked]=]/></p>
     </div>
     <div class="Cell">
       <p><input type=text class = "input_text_msisdn" value="$msisdn"/></p>
@@ -48,13 +48,14 @@ $items[[
       <p><input type=text class = "input_text_operator" value="$operator"/></p>
     </div>
     <div class="Cell">
-      <p><input type=text class = "input_text_user_name" value="$user_name"/></p>
+      <p><input type=text class = "input_text_name" value="$user_name"/></p>
     </div>
     <div class="Cell">
-      <p><input type=text class = "input_text_user_team" value="$user_team"/></p>
+      <p><input type=text class = "input_text_team" value="$user_team"/></p>
     </div>
     <div class="Cell">
-      <button type="button" class = "item_remove" item_id = "$id">Remove</button>
+      <button type="button" class = "item_update">Update</button>
+      <button type="button" class = "item_remove">Remove</button>
     </div>
   </div>
 ]]
