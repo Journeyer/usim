@@ -12,15 +12,17 @@ About
 =====
 This is just a personnal study of orbit
 
-
 Testing environment
+-------------------
 
 - Ubuntu 12.04
 
 Prerequisite
+------------
 
 - server side
 ::
+
  sudo apt-get install lua (lua 5.1)
  sudo luarocks install orbit
 
@@ -29,6 +31,7 @@ If anyone want this let me know.. though I cannot promise any..
 
 - client side
 ::
+
  chrome, IE or what ever browser you prefer
 
 
