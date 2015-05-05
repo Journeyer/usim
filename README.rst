@@ -24,10 +24,10 @@ Prerequisite
 ::
 
  sudo apt-get install lua (lua 5.1)
+ sudo apt-get install luarocks
  sudo luarocks install orbit
 
-Minor install trouble shooting needed. Orbit is not that kind to novice!
-If anyone want this let me know.. though I cannot promise any..
+Minor install trouble shooting needed.
 
 - client side
 ::
