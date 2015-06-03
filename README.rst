@@ -23,9 +23,18 @@ Prerequisite
 - server side
 ::
 
- sudo apt-get install lua (lua 5.1)
+ sudo apt-get install lua5.1
  sudo apt-get install luarocks
- sudo luarocks install orbit
+ sudo apt-get install sqlite3 libsqlite3-0 libsqlite3-dev
+ (sudo updatedb)
+ (sudo locate sqlite3.h)
+ (/usr/include/sqlite3.h)
+ sudo luarocks install luasql-sqlite3
+ git clone https://github.com/keplerproject/orbit
+ cd orbit
+ ./configure lua
+ sudo make install
+
 
 Minor install trouble shooting needed.
 
