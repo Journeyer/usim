@@ -36,8 +36,6 @@ Prerequisite
  sudo make install
 
 
-Minor install trouble shooting needed.
-
 - client side
 ::
 
