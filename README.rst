@@ -30,6 +30,8 @@ Prerequisite
  (sudo locate sqlite3.h)
  (/usr/include/sqlite3.h)
  sudo luarocks install luasql-sqlite3
+ sudo luarocks install orbit
+ sudo luarocks remove orbit
  git clone https://github.com/keplerproject/orbit
  cd orbit
  ./configure lua
